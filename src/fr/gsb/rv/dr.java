@@ -40,7 +40,6 @@ public class dr extends Application {
         MenuItem itemSeDeconnecter = new MenuItem("Se déconnecter");
         MenuItem itemQuitter = new MenuItem("Quitter");
         menuFichier.getItems().add(itemSeConnecter);
-        menuFichier.getItems().add(itemSeDeconnecter);
         
         
         SeparatorMenuItem SeparatorQuitter = new SeparatorMenuItem();
@@ -53,13 +52,9 @@ public class dr extends Application {
         
         Menu menuRapports = new Menu("Rapports");
         MenuItem itemConsulter = new MenuItem("Consulter");
-        menuRapports.getItems().add(itemConsulter);
-        barreMenus.getMenus().add(menuRapports);
         
         Menu menuPraticiens = new Menu("Praticiens");
         MenuItem itemHesitants = new MenuItem("Hésitants");
-        menuPraticiens.getItems().add(itemHesitants);
-        barreMenus.getMenus().add(menuPraticiens);
         
         BorderPane root = new BorderPane();
         root.setTop(barreMenus);
@@ -89,10 +84,27 @@ public class dr extends Application {
         
 
         itemSeConnecter.setOnAction( actionEvent -> {
+            barreMenus.getMenus().clear();
+            menuFichier.getItems().clear();
+            menuRapports.getItems().clear();
+            menuPraticiens.getItems().clear();
+            barreMenus.getMenus().add(menuFichier);
+
+            menuFichier.getItems().add( itemSeDeconnecter);
+            menuFichier.getItems().add( itemQuitter);         
+            menuRapports.getItems().add( itemConsulter );
+            menuPraticiens.getItems().add( itemHesitants );
+            barreMenus.getMenus().add( menuRapports );
+            barreMenus.getMenus().add( menuPraticiens );
             });
         
         itemSeDeconnecter.setOnAction( actionEvent -> {
-                
+            barreMenus.getMenus().clear();
+            menuFichier.getItems().clear();
+            
+            barreMenus.getMenus().add(menuFichier);
+            menuFichier.getItems().add(itemSeConnecter);
+            menuFichier.getItems().add(itemQuitter);
             });
         
         itemConsulter.setOnAction( actionEvent -> {
