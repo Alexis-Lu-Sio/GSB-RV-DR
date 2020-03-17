@@ -20,24 +20,29 @@ public class Session{
 
     private Session(Visiteur unVisiteur){
         
-        this.unVisiteur = unVisiteur;
+        Session.unVisiteur = unVisiteur;
     }
     
-    public static void ouvrir(Visiteur unVisiteur){
-       Session.session=new Session(unVisiteur); 
+    public static void ouvrir(Visiteur visiteur){
+       Session.session=new Session(visiteur); 
     }
     
     public static void fermer(){
         Session.session = null;
+        Session.unVisiteur = null;
     }
 
-    public static Visiteur getUnVisiteur() {
-        return unVisiteur;
+    public static Visiteur getLeVisiteur() {
+        return Session.unVisiteur;
     }
     
 
     public Session getSession() {
-        return session;
+        return Session.session;
+    }
+    
+        public static boolean estOuverte(){
+        return Session.session != null ;
     }
     
 }

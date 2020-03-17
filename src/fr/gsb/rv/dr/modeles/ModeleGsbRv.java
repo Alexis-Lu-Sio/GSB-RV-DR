@@ -1,4 +1,3 @@
-
 package fr.gsb.rv.dr.modeles;
 
 import fr.gsb.rv.dr.entites.Visiteur;
@@ -15,9 +14,7 @@ public class ModeleGsbRv {
         
         Connection connexion = ConnexionBD.getConnexion() ;
         
-        String requete = "select vis_nom "
-                + "from Visiteur "
-                + "where vis_matricule = ? and vis_mdp = ?" ;
+       String requete = "select vis_nom, vis_prenom from Visiteur where vis_matricule = ? and vis_mdp =?";
         
         try {
             PreparedStatement requetePreparee = (PreparedStatement) connexion.prepareStatement( requete ) ;
@@ -25,9 +22,7 @@ public class ModeleGsbRv {
             requetePreparee.setString( 2 , mdp );
             ResultSet resultat = requetePreparee.executeQuery() ;
             if( resultat.next() ){
-                Visiteur visiteur = new Visiteur() ;
-                visiteur.setMatricule( matricule );
-                visiteur.setNom( resultat.getString( "vis_nom" ) ) ;
+                Visiteur visiteur = new Visiteur(matricule, resultat.getString("vis_nom"), resultat.getString("vis_prenom")) ;
                 
                 requetePreparee.close() ;
                 return visiteur ;

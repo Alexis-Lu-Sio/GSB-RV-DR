@@ -6,9 +6,9 @@ import java.sql.DriverManager;
 
 public class ConnexionBD {
     
-    private static String dbURL = "jdbc:mysql://localhost:3306/GSBRV" ;
+    private static String dbURL = "jdbc:mysql://localhost:3306/gsbrv" ;
     private static String user = "root" ;
-    private static String password = "" ;
+    private static String password = "azerty" ;
     
     private static Connection connexion = null ;
     
