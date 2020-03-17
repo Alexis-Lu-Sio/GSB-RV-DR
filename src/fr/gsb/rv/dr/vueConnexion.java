@@ -6,6 +6,7 @@
 package fr.gsb.rv.dr;
 
 import fr.gsb.rv.dr.entites.Visiteur;
+import fr.gsb.rv.dr.modeles.ModeleGsbRv;
 import fr.gsb.rv.dr.technique.Session;
 import java.util.Optional;
 import javafx.application.Platform;
@@ -142,6 +143,9 @@ public class vueConnexion {
             
            
         if(reponse.get() == OK_DONE) {
+            ModeleGsbRv connexion = new ModeleGsbRv();
+            //connexion.seConnecter();
+            
             barreMenus.getMenus().clear();
             menuFichier.getItems().clear();
             menuRapports.getItems().clear();

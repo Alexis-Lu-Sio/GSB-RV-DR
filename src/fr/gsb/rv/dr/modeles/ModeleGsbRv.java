@@ -1,4 +1,5 @@
-package fr.gsb.rv.modeles;
+
+package fr.gsb.rv.dr.modeles;
 
 import fr.gsb.rv.dr.entites.Visiteur;
 import fr.gsb.rv.dr.technique.ConnexionBD;
@@ -10,17 +11,18 @@ import java.sql.SQLException;
 
 public class ModeleGsbRv {
     
-   /* public static Visiteur seConnecter( String matricule , String mdp ) throws ConnexionException{
+    public static Visiteur seConnecter( String matricule , String mdp ) throws ConnexionException{
         
         Connection connexion = ConnexionBD.getConnexion() ;
         
         String requete = "select vis_nom "
                 + "from Visiteur "
-                + "where vis_matricule = ?" ;
+                + "where vis_matricule = ? and vis_mdp = ?" ;
         
         try {
             PreparedStatement requetePreparee = (PreparedStatement) connexion.prepareStatement( requete ) ;
             requetePreparee.setString( 1 , matricule );
+            requetePreparee.setString( 2 , mdp );
             ResultSet resultat = requetePreparee.executeQuery() ;
             if( resultat.next() ){
                 Visiteur visiteur = new Visiteur() ;
@@ -37,5 +39,5 @@ public class ModeleGsbRv {
         catch( Exception e ){
             return null ;
         } 
-    }*/
+    }
 }
