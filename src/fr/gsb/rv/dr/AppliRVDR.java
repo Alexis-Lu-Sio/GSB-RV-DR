@@ -93,7 +93,17 @@ public class AppliRVDR extends Application {
         }
         System.out.println(visiteur.getMatricule() + visiteur.getNom() + visiteur.getPrenom());*/
         
-
+        PanneauAccueil vueAccueil = new PanneauAccueil();
+        vueAccueil.setStyle("-fx-background-color: white;");
+        PanneauPraticiens vuePraticiens = new PanneauPraticiens();
+        vuePraticiens.setStyle("-fx-background-color: white;");
+        PanneauRapports vueRapports= new PanneauRapports();
+        vueRapports.setStyle("-fx-background-color: white;");
+        StackPane panneau = new StackPane();
+        panneau.getChildren().add(vueAccueil);
+        panneau.getChildren().add(vuePraticiens);
+        panneau.getChildren().add(vueRapports);
+        
 
       
         MenuBar barreMenus = new MenuBar();
@@ -134,14 +144,14 @@ public class AppliRVDR extends Application {
         BorderPane root = new BorderPane();
         root.setTop(barreMenus);
         //root.getChildren().add(barreMenus);
+        
+        vueAccueil.setVisible(true);
+        vuePraticiens.setVisible(false);
+        vueRapports.setVisible(false);
+        root.setCenter(panneau);
 
         
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("GSB-RV");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        
+
         itemQuitter.setOnAction(actionEvent ->{
             Alert alertQuitter = new Alert (Alert.AlertType.CONFIRMATION);
             
@@ -208,6 +218,9 @@ public class AppliRVDR extends Application {
 
                 itemSeDeconnecter.setOnAction(actionEvent ->{
                     
+            vueRapports.setVisible(false);
+            vueAccueil.setVisible(true);
+            vuePraticiens.setVisible(false);        
             Session.fermer();
             session = Session.estOuverte();        
             barreMenus.getMenus().clear();
@@ -224,12 +237,23 @@ public class AppliRVDR extends Application {
         });
                 
        itemConsulter.setOnAction(actionEvent ->{
-           System.out.println("[Rapports] " + Session.getLeVisiteur().getNom() + " " + Session.getLeVisiteur().getPrenom());//TEST Couche technique 2-4 2-8 et Couche Modèle 3-4
+           //System.out.println("[Rapports] " + Session.getLeVisiteur().getNom() + " " + Session.getLeVisiteur().getPrenom());//TEST Couche technique 2-4 2-8 et Couche Modèle 3-4
+            vueRapports.setVisible(true);
+            vueAccueil.setVisible(false);
+            vuePraticiens.setVisible(false);
        });
        
        itemHesitants.setOnAction(actionEvent ->{
-           System.out.println("[Praticiens] " + Session.getLeVisiteur().getNom() + " " + Session.getLeVisiteur().getPrenom());//TEST Couche technique 2-4 2-8 et Couche Modèle 3-4
+           //System.out.println("[Praticiens] " + Session.getLeVisiteur().getNom() + " " + Session.getLeVisiteur().getPrenom());//TEST Couche technique 2-4 2-8 et Couche Modèle 3-4
+            vueRapports.setVisible(false);
+            vueAccueil.setVisible(false);
+            vuePraticiens.setVisible(true);
        });
+        Scene scene = new Scene(root, 300, 250);
+        
+        primaryStage.setTitle("GSB-RV");
+        primaryStage.setScene(scene);
+        primaryStage.show();
         
     }
     
