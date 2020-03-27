@@ -38,10 +38,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import static com.sun.javaws.ui.SplashScreen.hide;
+import fr.gsb.rv.dr.entites.Praticien;
 import static java.awt.SystemColor.menu;
 import fr.gsb.rv.dr.entites.Visiteur;
 import fr.gsb.rv.dr.technique.Session;
+import fr.gsb.rv.dr.utilitaires.ComparateurCoefConfiance;
+import fr.gsb.rv.dr.utilitaires.ComparateurCoefNotoriete;
+import fr.gsb.rv.dr.utilitaires.ComparateurDateVisite;
 import java.sql.PreparedStatement;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -92,6 +98,24 @@ public class AppliRVDR extends Application {
             
         }
         System.out.println(visiteur.getMatricule() + visiteur.getNom() + visiteur.getPrenom());*/
+        
+
+                List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesitants();
+        for (Praticien unPraticien : praticiens) {
+            System.out.println(unPraticien);
+        }
+        Collections.sort(praticiens, new ComparateurCoefConfiance());
+        for (Praticien unPraticien : praticiens) {
+            System.out.println(unPraticien);
+        }
+        Collections.sort(praticiens, new ComparateurCoefNotoriete());
+        for (Praticien unPraticien : praticiens) {
+            System.out.println(unPraticien);
+        }
+        Collections.sort(praticiens, new ComparateurDateVisite());
+        for (Praticien unPraticien : praticiens) {
+            System.out.println(unPraticien);
+        }
         
         PanneauAccueil vueAccueil = new PanneauAccueil();
         vueAccueil.setStyle("-fx-background-color: white;");
@@ -248,6 +272,9 @@ public class AppliRVDR extends Application {
             vueRapports.setVisible(false);
             vueAccueil.setVisible(false);
             vuePraticiens.setVisible(true);
+            
+
+        
        });
         Scene scene = new Scene(root, 300, 250);
         
