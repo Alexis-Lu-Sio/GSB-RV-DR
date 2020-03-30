@@ -100,7 +100,7 @@ public class AppliRVDR extends Application {
         System.out.println(visiteur.getMatricule() + visiteur.getNom() + visiteur.getPrenom());*/
         
 
-                List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesitants();
+             List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesitants();
         for (Praticien unPraticien : praticiens) {
             System.out.println(unPraticien);
         }

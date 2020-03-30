@@ -66,7 +66,7 @@ public class ModeleGsbRv {
                 resultat.getString("pra_nom"), resultat.getString("pra_ville"), 
                 Float.parseFloat(resultat.getString("pra_coefnotoriete")), 
                 LocalDate.parse(resultat.getString("rap_date_visite"), 
-                DateTimeFormatter.ofPattern("d/MM/yyyy")), 
+                DateTimeFormatter.ofPattern("yyyy-MM-d")), 
                 Integer.parseInt(resultat.getString("rap_coef_confiance")));
                 praticiensHesitants.add(praticien);
             }
