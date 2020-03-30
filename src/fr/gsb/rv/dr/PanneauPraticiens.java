@@ -17,7 +17,7 @@ public class PanneauPraticiens extends Pane {
 
 public PanneauPraticiens() {
         VBox vBox = new VBox();
-        Label label = new Label("Accueil");
+        Label label = new Label("Praticiens");
         vBox.getChildren().add(label);
         this.getChildren().add(vBox);    
 }

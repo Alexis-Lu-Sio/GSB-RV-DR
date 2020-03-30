@@ -93,7 +93,7 @@ public class AppliRVDR extends Application {
         }
         System.out.println(visiteur.getMatricule() + visiteur.getNom() + visiteur.getPrenom());*/
         
-
+        
         
         PanneauAccueil vueAccueil = new PanneauAccueil();
         vueAccueil.setStyle("-fx-background-color: white;");
@@ -245,6 +245,7 @@ public class AppliRVDR extends Application {
            vueAccueil.setVisible(false);
            vueRapports.setVisible(false);
            vuePraticiens.setVisible(true);
+           
        });
         
     }

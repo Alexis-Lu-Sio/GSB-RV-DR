@@ -17,7 +17,7 @@ public class PanneauRapports extends Pane {
 
     public PanneauRapports() {
         VBox vBox = new VBox();
-        Label label = new Label("Accueil");
+        Label label = new Label("Rapports");
         vBox.getChildren().add(label);
         this.getChildren().add(vBox);    
 }
