@@ -24,7 +24,7 @@ public class Praticien {
         return dernierCoefConfiance;
     }
 
-    public void setDernierCoefConfiance(int dernierCoefConfiance) {
+    public void setDernierCoefConfiance(float dernierCoefConfiance) {
         this.dernierCoefConfiance = dernierCoefConfiance;
     }
     public Praticien(String numero, String nom, String ville, float coefNotoriete, LocalDate dateDerniereVisite, float dernierCoefConfiance) {
@@ -78,6 +78,14 @@ public class Praticien {
 
     public void setDateDerniereVisite(LocalDate dateDerniereVisite) {
         this.dateDerniereVisite = dateDerniereVisite;
+    }
+
+    public void setPrenom(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getPrenom() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

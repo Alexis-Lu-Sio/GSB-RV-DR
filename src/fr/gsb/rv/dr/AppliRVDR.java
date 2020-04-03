@@ -100,7 +100,7 @@ public class AppliRVDR extends Application {
         System.out.println(visiteur.getMatricule() + visiteur.getNom() + visiteur.getPrenom());*/
         
 
-             List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesitants();
+       /*      List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesitants();
         for (Praticien unPraticien : praticiens) {
             System.out.println(unPraticien);
         }
@@ -115,15 +115,24 @@ public class AppliRVDR extends Application {
         Collections.sort(praticiens, new ComparateurDateVisite());
         for (Praticien unPraticien : praticiens) {
             System.out.println(unPraticien);
-        }
-        
+        }*/
+       
+       /*List<Visiteur> visiteurs= ModeleGsbRv.getVisiteur();
+        //System.out.println(visiteurs);
+        ModeleGsbRv.setRapportVisiteLu("a131",4);*/
+       
         PanneauAccueil vueAccueil = new PanneauAccueil();
-        vueAccueil.setStyle("-fx-background-color: white;");
+        vueAccueil.getPane().setStyle("-fx-background-color: white;");     
         PanneauPraticiens vuePraticiens = new PanneauPraticiens();
-        vuePraticiens.setStyle("-fx-background-color: white;");
-        PanneauRapports vueRapports= new PanneauRapports();
-        vueRapports.setStyle("-fx-background-color: white;");
+        vuePraticiens.getPane().setStyle("-fx-background-color: white;");
+        PanneauRapports vueRapports = new PanneauRapports();
+        vueRapports.getPane().setStyle("-fx-background-color: white;");
+
         StackPane panneau = new StackPane();
+        panneau.getChildren().add(vueAccueil.getPane());
+        panneau.getChildren().add(vueRapports.getPane());
+        panneau.getChildren().add(vuePraticiens.getPane());
+        
         panneau.getChildren().add(vueAccueil);
         panneau.getChildren().add(vuePraticiens);
         panneau.getChildren().add(vueRapports);
@@ -169,9 +178,9 @@ public class AppliRVDR extends Application {
         root.setTop(barreMenus);
         //root.getChildren().add(barreMenus);
         
-        vueAccueil.setVisible(true);
-        vuePraticiens.setVisible(false);
-        vueRapports.setVisible(false);
+        vueAccueil.getPane().setVisible(true);
+        vuePraticiens.getPane().setVisible(false);
+        vueRapports.getPane().setVisible(false);
         root.setCenter(panneau);
 
         
@@ -242,9 +251,9 @@ public class AppliRVDR extends Application {
 
                 itemSeDeconnecter.setOnAction(actionEvent ->{
                     
-            vueRapports.setVisible(false);
-            vueAccueil.setVisible(true);
-            vuePraticiens.setVisible(false);        
+            vueRapports.getPane().setVisible(false);
+            vueAccueil.getPane().setVisible(true);
+            vuePraticiens.getPane().setVisible(false);        
             Session.fermer();
             session = Session.estOuverte();        
             barreMenus.getMenus().clear();
@@ -262,16 +271,18 @@ public class AppliRVDR extends Application {
                 
        itemConsulter.setOnAction(actionEvent ->{
            //System.out.println("[Rapports] " + Session.getLeVisiteur().getNom() + " " + Session.getLeVisiteur().getPrenom());//TEST Couche technique 2-4 2-8 et Couche Modèle 3-4
-            vueRapports.setVisible(true);
-            vueAccueil.setVisible(false);
-            vuePraticiens.setVisible(false);
+            vueRapports.getPane().setVisible(true);
+            vueAccueil.getPane().setVisible(false);
+            vuePraticiens.getPane().setVisible(false);
+
+            
        });
        
        itemHesitants.setOnAction(actionEvent ->{
            //System.out.println("[Praticiens] " + Session.getLeVisiteur().getNom() + " " + Session.getLeVisiteur().getPrenom());//TEST Couche technique 2-4 2-8 et Couche Modèle 3-4
-            vueRapports.setVisible(false);
-            vueAccueil.setVisible(false);
-            vuePraticiens.setVisible(true);
+            vueRapports.getPane().setVisible(false);
+            vueAccueil.getPane().setVisible(false);
+            vuePraticiens.getPane().setVisible(true);
             
 
         

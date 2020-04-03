@@ -11,15 +11,17 @@ import javafx.scene.layout.VBox;
  * @author etudiant
  */
 public class PanneauAccueil extends Pane {
-
+    private Pane pane = new Pane();
+    
     public PanneauAccueil() {
-        VBox vBox = new VBox();
+        VBox grid = new VBox();
         Label label = new Label("Accueil");
-        vBox.getChildren().add(label);
-        this.getChildren().add(vBox);
-
-
+        grid.getChildren().add(label);
+        grid.setStyle("-fx-background-color : white"); 
+        pane.getChildren().add(grid);
     }
-
-
+    
+    public Pane getPane() {
+        return pane;
     }
+}
