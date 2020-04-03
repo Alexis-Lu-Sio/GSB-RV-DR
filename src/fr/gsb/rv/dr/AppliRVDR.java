@@ -38,10 +38,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import static com.sun.javaws.ui.SplashScreen.hide;
+import fr.gsb.rv.dr.entites.Praticien;
 import static java.awt.SystemColor.menu;
 import fr.gsb.rv.dr.entites.Visiteur;
 import fr.gsb.rv.dr.technique.Session;
+import fr.gsb.rv.dr.utilitaires.ComparateurCoefConfiance;
+import fr.gsb.rv.dr.utilitaires.ComparateurCoefNotoriete;
+import fr.gsb.rv.dr.utilitaires.ComparateurDateVisite;
 import java.sql.PreparedStatement;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -93,19 +99,46 @@ public class AppliRVDR extends Application {
         }
         System.out.println(visiteur.getMatricule() + visiteur.getNom() + visiteur.getPrenom());*/
         
-        
-        
+
+       /*      List<Praticien> praticiens = ModeleGsbRv.getPraticiensHesitants();
+        for (Praticien unPraticien : praticiens) {
+            System.out.println(unPraticien);
+        }
+        Collections.sort(praticiens, new ComparateurCoefConfiance());
+        for (Praticien unPraticien : praticiens) {
+            System.out.println(unPraticien);
+        }
+        Collections.sort(praticiens, new ComparateurCoefNotoriete());
+        for (Praticien unPraticien : praticiens) {
+            System.out.println(unPraticien);
+        }
+        Collections.sort(praticiens, new ComparateurDateVisite());
+        for (Praticien unPraticien : praticiens) {
+            System.out.println(unPraticien);
+        }*/
+       
+       /*List<Visiteur> visiteurs= ModeleGsbRv.getVisiteur();
+        //System.out.println(visiteurs);
+        ModeleGsbRv.setRapportVisiteLu("a131",4);*/
+       
         PanneauAccueil vueAccueil = new PanneauAccueil();
-        vueAccueil.setStyle("-fx-background-color: white;");
+        vueAccueil.getPane().setStyle("-fx-background-color: white;");     
         PanneauPraticiens vuePraticiens = new PanneauPraticiens();
-        vuePraticiens.setStyle("-fx-background-color: white;");
-        PanneauRapports vueRapports= new PanneauRapports();
-        vueRapports.setStyle("-fx-background-color: white;");
+        vuePraticiens.getPane().setStyle("-fx-background-color: white;");
+        PanneauRapports vueRapports = new PanneauRapports();
+        vueRapports.getPane().setStyle("-fx-background-color: white;");
+
         StackPane panneau = new StackPane();
+        panneau.getChildren().add(vueAccueil.getPane());
+        panneau.getChildren().add(vueRapports.getPane());
+        panneau.getChildren().add(vuePraticiens.getPane());
+        
         panneau.getChildren().add(vueAccueil);
         panneau.getChildren().add(vuePraticiens);
         panneau.getChildren().add(vueRapports);
         
+
+      
         MenuBar barreMenus = new MenuBar();
         Menu menuFichier = new Menu( "Fichier" ) ;
         MenuItem itemSeConnecter = new MenuItem( "Se Connecter");
@@ -144,14 +177,14 @@ public class AppliRVDR extends Application {
         BorderPane root = new BorderPane();
         root.setTop(barreMenus);
         //root.getChildren().add(barreMenus);
+        
+        vueAccueil.getPane().setVisible(true);
+        vuePraticiens.getPane().setVisible(false);
+        vueRapports.getPane().setVisible(false);
+        root.setCenter(panneau);
 
         
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("GSB-RV");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        
+
         itemQuitter.setOnAction(actionEvent ->{
             Alert alertQuitter = new Alert (Alert.AlertType.CONFIRMATION);
             
@@ -218,6 +251,9 @@ public class AppliRVDR extends Application {
 
                 itemSeDeconnecter.setOnAction(actionEvent ->{
                     
+            vueRapports.getPane().setVisible(false);
+            vueAccueil.getPane().setVisible(true);
+            vuePraticiens.getPane().setVisible(false);        
             Session.fermer();
             session = Session.estOuverte();        
             barreMenus.getMenus().clear();
@@ -234,19 +270,28 @@ public class AppliRVDR extends Application {
         });
                 
        itemConsulter.setOnAction(actionEvent ->{
-           System.out.println("[Rapports] " + Session.getLeVisiteur().getNom() + " " + Session.getLeVisiteur().getPrenom());//TEST Couche technique 2-4 2-8 et Couche Modèle 3-4
-           vueAccueil.setVisible(false);
-           vueRapports.setVisible(true);
-           vuePraticiens.setVisible(false);
+           //System.out.println("[Rapports] " + Session.getLeVisiteur().getNom() + " " + Session.getLeVisiteur().getPrenom());//TEST Couche technique 2-4 2-8 et Couche Modèle 3-4
+            vueRapports.getPane().setVisible(true);
+            vueAccueil.getPane().setVisible(false);
+            vuePraticiens.getPane().setVisible(false);
+
+            
        });
        
        itemHesitants.setOnAction(actionEvent ->{
-           System.out.println("[Praticiens] " + Session.getLeVisiteur().getNom() + " " + Session.getLeVisiteur().getPrenom());//TEST Couche technique 2-4 2-8 et Couche Modèle 3-4
-           vueAccueil.setVisible(false);
-           vueRapports.setVisible(false);
-           vuePraticiens.setVisible(true);
-           
+           //System.out.println("[Praticiens] " + Session.getLeVisiteur().getNom() + " " + Session.getLeVisiteur().getPrenom());//TEST Couche technique 2-4 2-8 et Couche Modèle 3-4
+            vueRapports.getPane().setVisible(false);
+            vueAccueil.getPane().setVisible(false);
+            vuePraticiens.getPane().setVisible(true);
+            
+
+        
        });
+        Scene scene = new Scene(root, 1000, 1000);
+        
+        primaryStage.setTitle("GSB-RV");
+        primaryStage.setScene(scene);
+        primaryStage.show();
         
     }
     
